@@ -1,8 +1,8 @@
 <?php
 
-// create curl resource
+	// create curl resource
         
-ini_set('display_errors', 0);
+	ini_set('display_errors', 0);
         // set url
         // $res= exec("curl -u testclient:testpass http://localhost/my-oauth-walkthrough/token.php -d 'grant_type=client_credentials'");
         // print_r($res);
@@ -20,7 +20,7 @@ ini_set('display_errors', 0);
             // display an authorization form
                 if (empty($_POST)) {
                   exit('
-                <form method="post">
+                <form method="post" action="'.$_SERVER['PHP_SELF'].'">
                   <label>Do You Authorize TestClient?</label><br />
                   <input type="text" name="access_token" value="'.$objRes->access_token.'"/>
                   <input type="submit" name="authorized" value="yes">
@@ -29,36 +29,21 @@ ini_set('display_errors', 0);
                 }
         }
 
-        if ($_REQUEST['authorized']) {
+        if ($_POST['authorized'] == 'yes') {
 
-       
-//            print_r("sdfs");
-        
             echo header('Content-Type: application/json');
             $res= exec("curl http://localhost/crudapi/resource.php -d 'access_token=".$_REQUEST['access_token']."'");
-
-
         
             echo $res;
-            exit;
-
-             // $token['url'] = "http://localhost/my-oauth-walkthrough/resource.php";
-           
-             // $data = array("access_token" => $_REQUEST['access_token']);           
-             // $token['data_string'] = json_encode($data);  
-             // // print_r($data); 
-
-             // $objaurthRes = curlexec2($token);
-
-             // print_r($objaurthRes );
+            exit; 
 
         }
+	else  {
+	    echo "Access users data through <a href='http://localhost/oauthrequest/curlindex.php?access_tkn=yes'>oAuth</a>";
+	}
 
-            // print the authorization code if the user has authorized your client
-
-             
-        // close curl resource to free up system resources
-function curlexec2($param) {
+	
+	function curlexec2($param) {
 
 
         $ch = curl_init();
