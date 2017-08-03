@@ -49,14 +49,16 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); 
 $result = curl_exec($ch);
 
-print_r($result);
-exit;
 curl_setopt($ch, CURLOPT_URL, 'https://www.siteminder.com.au/web/extranet/reports/6086/checkins');
 
 $result = "<?xml version=\"1.0\" encoding=\"utf-8\"?>".curl_exec($ch);  
 
+print_r($result);
+
 $html = str_get_html($result);
 
+print_r($html);
+exit;
 foreach($html->find('.checkin-date') as $date){
     foreach($date->find('.dom') as $dom){
         foreach($date->find('.reservation-list') as $ul) 
