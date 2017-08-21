@@ -57,10 +57,7 @@ if (trim($tag) == '') {
 function unset_null_children($value, $key){
 	 
     return empty($value)  ? true: false;
-}
-?>
-
-
+} 
 
 $xmlfile =  "http://" . $_SERVER['HTTP_HOST'] . "/xmltest/" . $xmlfile;
  
